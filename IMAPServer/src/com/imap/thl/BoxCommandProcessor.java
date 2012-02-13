@@ -1,15 +1,19 @@
 package com.imap.thl;
 
-public class RootCommandProcessor extends CommandProcessor {
+public class BoxCommandProcessor extends CommandProcessor {
 
     private String _username = null;
     private String _password = null;
-    private String [] _boxes = { "Inbox", "Outbox", "Trash", "Drafts" };
-    private String [] _references = { "ref1", "/ref2" };
+    private String _box = null;
 
-    public RootCommandProcessor(String username, String password) {
+    private String [] _references = null;
+
+    public BoxCommandProcessor(String username, String password, String box) {
         _username = username;
         _password = password;
+        _box = box;
+
+        _references = new String [] { _box + "/ref1", _box + "/ref2" };
     }
 
     @Override
