@@ -58,31 +58,31 @@ public class Client {
 
 	public String readResponse() throws IOException {
 		String res = in.readLine();
-		
+
 		if (res == null) return null;
-		
+
 		if (res.startsWith("-ERR"))
 			throw new RuntimeException("Server has returned an error: " + res.replaceFirst("-ERR ", ""));
-	
+
 		log("Server: " + res);
 		return res;
 	}
 
 	public void sendCommand(String command) throws IOException {
-		
+
 		log ("---------------------------\n");
-		
+
 		String tag = "a" + tagNumber++;
 		String req = tag + " " + command;
 		log("Client: " + req);
-		
+
 		out.write(req + "\r\n");
 		out.flush();
-		
+
 		// Read responses until we get final response for tag
 		while(!readResponse().startsWith(tag)) { }
 	}
-	
+
 	public void login(String username, String password) throws IOException {
 		sendCommand("LOGIN  " + username + " " + password);
 	}

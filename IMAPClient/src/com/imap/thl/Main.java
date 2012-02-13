@@ -8,7 +8,7 @@ public class Main {
 
 	public static void main(String[] args) throws IOException {
 		Client client = new Client();
-		
+
 		client.connect();
 		client.login("imapnice@gmail.com", "niceimap");
 
@@ -30,6 +30,7 @@ public class Main {
 	private static void startRepl(Client client) throws IOException {
 		BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 
+        System.out.println("Ready for more commands");
 		System.out.print("> ");
 
 		String command = null;
