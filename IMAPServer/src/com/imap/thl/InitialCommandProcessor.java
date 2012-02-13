@@ -12,14 +12,16 @@ public class InitialCommandProcessor extends CommandProcessor {
         super.processCommand(commandWithTag);
 
         Boolean isAuthorized = false;
-        if (command.startsWith("LOGIN")) {
+
+        if (verb.equals(Verbs.LOGIN)) {
             extractCredentials();
             isAuthorized = validateAuthorization();
+
             if (isAuthorized) {
                 RootCommandProcessor rootProc = new RootCommandProcessor(_username, _password);
                 return new CommandResponse(tag + " Successfully logged in.", rootProc);
             } else {
-                String msg = " Invalid username (" + _username + ") and/or password";
+                String msg = " Invalid username (" + _username + ") and/or password " + _password;
                 return new CommandResponse(tag + msg, this);
             }
         }
@@ -28,12 +30,11 @@ public class InitialCommandProcessor extends CommandProcessor {
     }
 
     private void extractCredentials() {
-        String [] words = command.split(" ");
-        if (words.length < 3) {
+        if (wordNumber < 3) {
             _username = _password = null;
         } else {
-            _username = words[1];
-            _password = words[2];
+            _username = arg1;
+            _password = arg2;
         }
     }
 
