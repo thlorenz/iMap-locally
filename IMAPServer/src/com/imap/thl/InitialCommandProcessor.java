@@ -11,13 +11,13 @@ public class InitialCommandProcessor extends CommandProcessor {
     public CommandResponse processCommand(String commandWithTag) {
         super.processCommand(commandWithTag);
 
-        System.out.println("Tag " + tag + "Command " + command);
         Boolean isAuthorized = false;
         if (command.startsWith("LOGIN")) {
             extractCredentials();
             isAuthorized = validateAuthorization();
             if (isAuthorized) {
-                return new CommandResponse(tag + " Logged in.", this);
+                RootCommandProcessor rootProc = new RootCommandProcessor(_username, _password);
+                return new CommandResponse(tag + " Successfully logged in.", rootProc);
             } else {
                 String msg = " Invalid username (" + _username + ") and/or password";
                 return new CommandResponse(tag + msg, this);
