@@ -10,7 +10,7 @@ public class Main {
 		Client client = new Client();
 
 		client.connect();
-		client.login("imapnice@gmail.com", "niceimap");
+		client.login("imapnice", "niceimap");
 
 		/*
 		client.sendCommand("STATUS INBOX (messages)");

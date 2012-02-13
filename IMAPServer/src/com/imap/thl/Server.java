@@ -54,9 +54,12 @@ public class Server {
 
 		IMAPProtocol protocol = new IMAPProtocol();
 
-        out.println(protocol.getReadyMessage(clientSocket.getRemoteSocketAddress().toString()));
-    
-        // Communicate with client until he says bye
+        // Send ready message
+        String url = clientSocket.getRemoteSocketAddress().toString();
+        String readyMessage = protocol.getReadyMessage(url);
+        out.println(readyMessage);
+
+        // Communicate with client until he logs out
         while ((inputLine = in.readLine()) != null) {
             outputLine = protocol.processCommand(inputLine);
             log("Processed command: " + outputLine);

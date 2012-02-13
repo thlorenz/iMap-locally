@@ -2,10 +2,19 @@ package com.imap.thl;
 
 public class IMAPProtocol {
 
+    private CommandProcessor _commandProcessor = null;
+
+    public IMAPProtocol() {
+        _commandProcessor = new InitialCommandProcessor();
+    }
 
 	public String processCommand(String command) {
 		log(command);
-		return command;
+
+        CommandResponse res = _commandProcessor.processCommand(command);
+        _commandProcessor = res.getNextCommandProcessor();
+
+		return res.getReply();
 	}
 
     public String getReadyMessage(String url) {

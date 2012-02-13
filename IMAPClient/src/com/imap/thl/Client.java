@@ -84,7 +84,7 @@ public class Client {
 	}
 
 	public void login(String username, String password) throws IOException {
-		sendCommand("LOGIN  " + username + " " + password);
+		sendCommand("LOGIN " + username + " " + password);
 	}
 
 	public void logout() throws IOException {
